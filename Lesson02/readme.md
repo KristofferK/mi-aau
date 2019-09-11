@@ -4,7 +4,11 @@ Tager en labyrint og viser hvornår de forskellige felter bliver tilføjet til f
 Resultatet bliver vist i konsollen og gemt som et billede
 
 # Brug
-Labyrintet kan ændres i `MazeGenerator.cs`.
+Labyrinter kan ændres i `MazeGenerator.cs`.
 
 # Muligt output
 ![Example output](http://github-images.fobr.dk/mazeOutput3.png "Example output")
+
+![Example output](http://github-images.fobr.dk/mazeOutput4.png "Example output")
+
+![Example output](http://github-images.fobr.dk/mazeOutput5.png "Example output")

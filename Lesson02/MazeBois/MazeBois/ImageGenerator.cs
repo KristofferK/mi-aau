@@ -9,7 +9,7 @@ namespace MazeBois
 {
     public class ImageGenerator
     {
-        public void GenerateImage(Dictionary<Tuple<int, int>, int> result, List<Coord> path, MazeRepresentaion maze)
+        public void GenerateImage(Dictionary<Tuple<int, int>, int> result, List<Coord> path, MazeRepresentaion maze, string imageTitle)
         {
             Image resultImage = new Bitmap(maze.Cols * 100, maze.Rows * 100, PixelFormat.Format32bppArgb);
             Graphics graphics = Graphics.FromImage(resultImage);
@@ -36,7 +36,7 @@ namespace MazeBois
                 }
             }
 
-            resultImage.Save(Path.Combine(Path.GetTempPath(), "maze.jpg"), ImageFormat.Jpeg);
+            resultImage.Save(Path.Combine(Path.GetTempPath(), imageTitle), ImageFormat.Jpeg);
             graphics.Dispose();
             fontFroniterValue.Dispose();
             fontContent.Dispose();
