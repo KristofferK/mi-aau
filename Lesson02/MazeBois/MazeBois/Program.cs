@@ -12,8 +12,9 @@ namespace MazeBois
         {
             var maze = new MazeGenerator().GenerateMaze();
             var frontiterResult = new Traverser().FrontierCounter(maze);
-            new Printer().PrintTraversalResult(frontiterResult, maze);
-            new ImageGenerator().GenerateImage(frontiterResult, maze);
+            var path = new ShortestPathFinder().GetCoordinatesUsed(frontiterResult, maze);
+            new Printer().PrintTraversalResult(frontiterResult, path, maze);
+            new ImageGenerator().GenerateImage(frontiterResult, path, maze);
         }
     }
 }

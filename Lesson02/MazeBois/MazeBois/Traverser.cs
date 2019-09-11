@@ -13,7 +13,7 @@ namespace MazeBois
             var marked = new Dictionary<Tuple<int, int>, int>();
             var moves = 0;
             var queue = new Queue<Coord>();
-            queue.Enqueue(GetStart(maze));
+            queue.Enqueue(maze.GetStart());
             while (queue.Count > 0)
             {
                 var current = queue.Dequeue();
@@ -31,21 +31,6 @@ namespace MazeBois
             }
 
             return marked;
-        }
-
-        private Coord GetStart(MazeRepresentaion maze)
-        {
-            for (var i = 0; i < maze.Rows; i++)
-            {
-                for (var j = 0; j < maze.Cols; j++)
-                {
-                    if (maze.AtPos(i, j) == 's')
-                    {
-                        return new Coord(i, j);
-                    }
-                }
-            }
-            return null;
         }
     }
 }

@@ -8,19 +8,19 @@ namespace MazeBois
 {
     public class Printer
     {
-        public void PrintTraversalResult(Dictionary<Tuple<int, int>, int> result, MazeRepresentaion maze)
+        public void PrintTraversalResult(Dictionary<Tuple<int, int>, int> result, List<Coord> path, MazeRepresentaion maze)
         {
             for (var i = 0; i < maze.Rows; i++)
             {
                 for (var j = 0; j < maze.Cols; j++)
                 {
-                    Console.ForegroundColor = GetColor(maze, i, j);
+                    Console.ForegroundColor = GetColor(maze, path, i, j);
                     Console.Write($"     {maze.AtPos(i, j)}     ");
                 }
                 Console.WriteLine();
                 for (var j = 0; j < maze.Cols; j++)
                 {
-                    Console.ForegroundColor = GetColor(maze, i, j);
+                    Console.ForegroundColor = GetColor(maze, path, i, j);
                     var tuple = new Tuple<int, int>(i, j);
                     if (result.ContainsKey(tuple))
                     {
@@ -36,8 +36,9 @@ namespace MazeBois
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        private ConsoleColor GetColor(MazeRepresentaion maze, int i, int j)
+        private ConsoleColor GetColor(MazeRepresentaion maze, List<Coord> path, int i, int j)
         {
+            if (path.Any(e => e.X == i && e.Y == j)) return ConsoleColor.Magenta;
             var c = maze.AtPos(i, j);
             if (c == 's') return ConsoleColor.Cyan;
             else if (c == 'g') return ConsoleColor.Cyan;

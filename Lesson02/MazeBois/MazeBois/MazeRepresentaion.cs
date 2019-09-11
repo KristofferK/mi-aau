@@ -45,5 +45,30 @@ namespace MazeBois
         {
             return Legal(c.X, c.Y);
         }
+
+        public Coord GetStart()
+        {
+            return GetSymbol('s');
+        }
+
+        public Coord GetEnd()
+        {
+            return GetSymbol('g');
+        }
+
+        private Coord GetSymbol(char symbol)
+        {
+            for (var i = 0; i < Rows; i++)
+            {
+                for (var j = 0; j < Cols; j++)
+                {
+                    if (AtPos(i, j) == symbol)
+                    {
+                        return new Coord(i, j);
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
