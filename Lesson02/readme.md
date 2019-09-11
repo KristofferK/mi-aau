@@ -7,4 +7,4 @@ Resultatet bliver vist i konsollen og gemt som et billede
 Labyrintet kan ændres i `MazeGenerator.cs`.
 
 # Muligt output
-![Example output](http://github-images.fobr.dk/mazeOutput.png "Example output")
+![Example output](http://github-images.fobr.dk/mazeOutput2.png "Example output")
