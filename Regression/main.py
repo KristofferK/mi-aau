@@ -21,8 +21,8 @@ print(', '.join([x.get_asv() for x in erysipelotrichia_bacterias]))
 import matplotlib.pyplot as plt
 
 def example_plot():
-    bacteria = bacterias.get(2)
-    plt.figure(0).canvas.set_window_title("Measurement for " + bacteria.get_asv())
+    bacteria = bacterias.get_bacteria_by_asv("ASV2")
+    plt.figure(0).canvas.set_window_title("Measurement for " + bacteria.__str__())
     plt.xlabel('Measurement number')
     plt.ylabel('Bacteria concentration')
     for i in range(len(bacteria.get_measurements())):

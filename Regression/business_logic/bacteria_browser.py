@@ -12,6 +12,9 @@ class BacteriaBrowser:
 
     def get(self, index: int) -> Bacteria:
         return self.bacterias[index]
+
+    def get_bacteria_by_asv(self, asv: str) -> Bacteria:
+        return next(b for b in self.bacterias if b.get_asv() == asv)
     
     def get_all(self) -> List[Bacteria]:
         return self.bacterias

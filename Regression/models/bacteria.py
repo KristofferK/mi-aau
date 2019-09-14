@@ -30,4 +30,4 @@ class Bacteria:
         return self.measurements
 
     def __str__(self) -> str:
-        return "%s (%s)" %(self.genus, self.bacteria_class)
+        return "%s (genus %s of class %s)" %(self.asv, self.genus, self.bacteria_class)
