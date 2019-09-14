@@ -86,8 +86,8 @@ def download_data():
         #index_col=-1,      # use the last column as row labels
 
         # Generate column headers row from each column number
-        header=None,
-        #header=0,          # use the first line as headers
+        #header=None,
+        header=0,          # use the first line as headers
 
         # Use manual headers and skip the first row in the file
         #header=0,
