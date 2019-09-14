@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 
 def example_plot():
     bacteria = bacterias.get_bacteria_by_asv("ASV2")
-    plt.figure(0).canvas.set_window_title("Measurement for " + bacteria.__str__())
+    plt.figure(0).canvas.set_window_title(bacteria)
     plt.xlabel('Measurement number')
     plt.ylabel('Bacteria concentration')
     for i in range(len(bacteria.get_measurements())):
