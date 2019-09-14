@@ -18,13 +18,13 @@ class Bacteria:
         return self.bacteria_class
 
     def add_measurement(self, value: float) -> None:
-        self.measurements.append(value)
+        self.measurements.append(float(value))
     
     def get_measurement(self, index: int) -> float:
         return self.measurements[index]
 
     def set_measurements(self, measurements: List[float]) -> None:
-        self.measurements = measurements
+        self.measurements = [float(m) for m in measurements]
 
     def get_measurements(self) -> List[float]:
         return self.measurements
