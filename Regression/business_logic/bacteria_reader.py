@@ -1,5 +1,5 @@
 import csv
-from models.bacteria import Bacteria
+from models.bacterium import Bacterium
 from business_logic.bacteria_browser import BacteriaBrowser
 
 class BacteriaReader:
@@ -16,8 +16,8 @@ class BacteriaReader:
                 line_count += 1
                 if (line_count == 1):
                     continue
-                bacteria = Bacteria(row[0], row[1][3:], row[2][3:])
-                bacteria.set_measurements(row[3:])
-                browser.add(bacteria)
+                bacterium = Bacterium(row[0], row[1][3:], row[2][3:])
+                bacterium.set_measurements(row[3:])
+                browser.add(bacterium)
                 
             return browser

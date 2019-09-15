@@ -1,11 +1,11 @@
 from typing import List
 
-class Bacteria:
+class Bacterium:
     measurements: List[float] = []
 
-    def __init__(self, asv: str, genus: str, bacteria_class: str):
+    def __init__(self, asv: str, genus: str, bacterium_class: str):
         self.genus = genus
-        self.bacteria_class = bacteria_class
+        self.bacterium_class = bacterium_class
         self.asv = asv
 
     def get_asv(self) -> str:
@@ -15,7 +15,7 @@ class Bacteria:
         return self.genus
 
     def get_class(self) -> str:
-        return self.bacteria_class
+        return self.bacterium_class
 
     def add_measurement(self, value: float) -> None:
         self.measurements.append(float(value))
@@ -30,4 +30,4 @@ class Bacteria:
         return self.measurements
 
     def __str__(self) -> str:
-        return "%s (genus %s of class %s)" %(self.asv, self.genus, self.bacteria_class)
+        return "Bacterium %s (genus %s of class %s)" %(self.asv, self.genus, self.bacterium_class)

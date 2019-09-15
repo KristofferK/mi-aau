@@ -1,26 +1,26 @@
 from typing import List
-from models.bacteria import Bacteria
+from models.bacterium import Bacterium
 
 class BacteriaBrowser:
-    bacterias: List[Bacteria] = []
+    bacteria: List[Bacterium] = []
 
     def __init__(self):
         pass
 
-    def add(self, bacteria: Bacteria) -> None:
-        self.bacterias.append(bacteria)
+    def add(self, bacterium: Bacterium) -> None:
+        self.bacteria.append(bacterium)
 
-    def get(self, index: int) -> Bacteria:
-        return self.bacterias[index]
+    def get(self, index: int) -> Bacterium:
+        return self.bacteria[index]
 
-    def get_bacteria_by_asv(self, asv: str) -> Bacteria:
-        return next(b for b in self.bacterias if b.get_asv() == asv)
+    def get_bacteria_by_asv(self, asv: str) -> Bacterium:
+        return next(b for b in self.bacteria if b.get_asv() == asv)
     
-    def get_all(self) -> List[Bacteria]:
-        return self.bacterias
+    def get_all(self) -> List[Bacterium]:
+        return self.bacteria
     
-    def get_bacterias_by_genus(self, genus: str) -> List[Bacteria]:
-        return [b for b in self.bacterias if b.get_genus() == genus]
+    def get_bacteria_by_genus(self, genus: str) -> List[Bacterium]:
+        return [b for b in self.bacteria if b.get_genus() == genus]
     
-    def get_bacterias_by_class(self, bacteria_class: str) -> List[Bacteria]:
-        return [b for b in self.bacterias if b.get_class() == bacteria_class]
+    def get_bacteria_by_class(self, bacterium_class: str) -> List[Bacterium]:
+        return [b for b in self.bacteria if b.get_class() == bacterium_class]
