@@ -42,13 +42,18 @@ def example_plot(bacteria: BacteriaBrowser):
 
 # Hent alle bakterier ned og gem dem som billede
 def print_image(bacterium):
+    path = "bacteria/%s.png" %(bacterium.get_asv())
+    if os.path.isfile(path):
+        print("skipped %s" %(path))
+        return
     fig = plt.figure()
     plt.xlabel('Measurement number')
     plt.ylabel('Bacteria concentration')
     for i in range(len(bacterium.get_measurements())):
         plt.plot(i, bacterium.get_measurement(i), 'rs')
-    fig.savefig("bacteria/%s.png" %(bacterium.get_asv()))
-    print("saved bacteria/%s.png" %(bacterium.get_asv()))
+    fig.savefig(path)
+    plt.close(fig)
+    print("saved %s" %(path))
 
 def save_bacteria_images(bacteria: BacteriaBrowser):
     if not os.path.exists("bacteria"):
