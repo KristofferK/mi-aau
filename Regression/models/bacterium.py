@@ -27,7 +27,7 @@ class Bacterium:
         self.measurements = [float(m) for m in measurements]
 
     def get_measurements(self) -> List[float]:
-        return self.measurements
+        return self.measurements 
 
     def __str__(self) -> str:
         return "Bacterium %s (genus %s of class %s)" %(self.asv, self.genus, self.bacterium_class)

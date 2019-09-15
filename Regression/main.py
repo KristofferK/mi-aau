@@ -28,5 +28,22 @@ def example_plot():
     for i in range(len(bacterium.get_measurements())):
         plt.plot(i, bacterium.get_measurement(i), 'rs')
     plt.show()
+#example_plot()
 
-example_plot()
+
+# Eksempel på hvad vi kan træne med, og hvad vi kan teste imod
+from business_logic.bacterium_train_test_splitter import BacteriumTrainTestSplitter
+bacterium = bacteria.get_bacteria_by_asv("ASV1")
+split_result = BacteriumTrainTestSplitter(bacterium).split(0.8)
+print('Skal træne med følgende x værdier (måling nummer)')
+print(split_result.x_train)
+print('Skal træne med følgende y værdier (bakterie koncentration)')
+print(split_result.y_train)
+print('Skal teste mod disse x værdier (måling nummer)')
+print(split_result.x_test)
+print('Skal ramme disse y værdier (koncentration)')
+print(split_result.y_test)
+
+#from sklearn.linear_model import LinearRegression
+#regressor = LinearRegression()  
+#regressor.fit(split_result.x_train, split_result.y_train)
