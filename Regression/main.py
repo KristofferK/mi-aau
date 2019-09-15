@@ -1,27 +1,36 @@
 import os
+import multiprocessing
+import matplotlib.pyplot as plt
 from models.bacterium import Bacterium
+from business_logic.bacteria_browser import BacteriaBrowser
 from business_logic.bacteria_reader import BacteriaReader
 
-# Hent bakterierne ind
-reader = BacteriaReader("bacteria.csv")
-bacteria = reader.read_from_csv()
+def main():
+    # Hent bakterierne ind
+    reader = BacteriaReader("bacteria.csv")
+    bacteria = reader.read_from_csv()
+
+    #example_browse(bacteria)
+    #example_plot(bacteria)
+    save_bacteria_images(bacteria)
+    #train_test_split(bacteria)
+
 
 # Eksempel på hvordan vi kan hente alle baktierer der har en bestemt slægt eller klasse.
-candidatus_microthrix_bacteria = bacteria.get_bacteria_by_genus("Candidatus_Microthrix")
-print('Bakterier med slægten Candidatus Microthrix')
-print(', '.join([x.get_asv() for x in candidatus_microthrix_bacteria]))
+def example_browse(bacteria: BacteriaBrowser):
+    candidatus_microthrix_bacteria = bacteria.get_bacteria_by_genus("Candidatus_Microthrix")
+    print('Bakterier med slægten Candidatus Microthrix')
+    print(', '.join([x.get_asv() for x in candidatus_microthrix_bacteria]))
 
-print('')
+    print('')
 
-erysipelotrichia_bacteria = bacteria.get_bacteria_by_class("Erysipelotrichia")
-print('Bakterier med klassen Erysipelotrichia')
-print(', '.join([x.get_asv() for x in erysipelotrichia_bacteria]))
+    erysipelotrichia_bacteria = bacteria.get_bacteria_by_class("Erysipelotrichia")
+    print('Bakterier med klassen Erysipelotrichia')
+    print(', '.join([x.get_asv() for x in erysipelotrichia_bacteria]))
 
 
 # Eksempel på hvordan data kan vises
-import matplotlib.pyplot as plt
-
-def example_plot():
+def example_plot(bacteria: BacteriaBrowser):
     bacterium = bacteria.get_bacteria_by_asv("ASV2")
     plt.figure(0).canvas.set_window_title(bacterium)
     plt.xlabel('Measurement number')
@@ -29,37 +38,43 @@ def example_plot():
     for i in range(len(bacterium.get_measurements())):
         plt.plot(i, bacterium.get_measurement(i), 'rs')
     plt.show()
-#example_plot()
 
 
 # Hent alle bakterier ned og gem dem som billede
-def save_bacteria_images():
+def print_image(bacterium):
+    fig = plt.figure()
+    plt.xlabel('Measurement number')
+    plt.ylabel('Bacteria concentration')
+    for i in range(len(bacterium.get_measurements())):
+        plt.plot(i, bacterium.get_measurement(i), 'rs')
+    fig.savefig("bacteria/%s.png" %(bacterium.get_asv()))
+    print("saved bacteria/%s.png" %(bacterium.get_asv()))
+
+def save_bacteria_images(bacteria: BacteriaBrowser):
     if not os.path.exists("bacteria"):
         os.mkdir("bacteria")
-    for bacterium in bacteria.get_all():
-        plt.figure(0).canvas.set_window_title(bacterium)
-        plt.xlabel('Measurement number')
-        plt.ylabel('Bacteria concentration')
-        for i in range(len(bacterium.get_measurements())):
-            plt.plot(i, bacterium.get_measurement(i), 'rs')
-        plt.savefig("bacteria/%s.png" %(bacterium.get_asv()))
-        print("saved bacteria/%s.png" %(bacterium.get_asv()))
-save_bacteria_images() 
+    pool = multiprocessing.Pool()
+    pool.map(print_image, bacteria.get_all())
 
 
-# Eksempel på hvad vi kan træne med, og hvad vi kan teste imod
-from business_logic.bacterium_train_test_splitter import BacteriumTrainTestSplitter
-bacterium = bacteria.get_bacteria_by_asv("ASV1")
-split_result = BacteriumTrainTestSplitter(bacterium).split(0.8)
-print('Skal træne med følgende x værdier (måling nummer)')
-print(split_result.x_train)
-print('Skal træne med følgende y værdier (bakterie koncentration)')
-print(split_result.y_train)
-print('Skal teste mod disse x værdier (måling nummer)')
-print(split_result.x_test)
-print('Skal ramme disse y værdier (koncentration)')
-print(split_result.y_test)
+def train_test_split(bacteria: BacteriaBrowser):
+    # Eksempel på hvad vi kan træne med, og hvad vi kan teste imod
+    from business_logic.bacterium_train_test_splitter import BacteriumTrainTestSplitter
+    bacterium = bacteria.get_bacteria_by_asv("ASV1")
+    split_result = BacteriumTrainTestSplitter(bacterium).split(0.8)
+    print('Skal træne med følgende x værdier (måling nummer)')
+    print(split_result.x_train)
+    print('Skal træne med følgende y værdier (bakterie koncentration)')
+    print(split_result.y_train)
+    print('Skal teste mod disse x værdier (måling nummer)')
+    print(split_result.x_test)
+    print('Skal ramme disse y værdier (koncentration)')
+    print(split_result.y_test)
 
-#from sklearn.linear_model import LinearRegression
-#regressor = LinearRegression()  
-#regressor.fit(split_result.x_train, split_result.y_train)
+    #from sklearn.linear_model import LinearRegression
+    #regressor = LinearRegression()  
+    #regressor.fit(split_result.x_train, split_result.y_train)
+
+
+if __name__=='__main__':
+    main()
