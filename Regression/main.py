@@ -1,3 +1,4 @@
+import os
 from models.bacterium import Bacterium
 from business_logic.bacteria_reader import BacteriaReader
 
@@ -29,6 +30,21 @@ def example_plot():
         plt.plot(i, bacterium.get_measurement(i), 'rs')
     plt.show()
 #example_plot()
+
+
+# Hent alle bakterier ned og gem dem som billede
+def save_bacteria_images():
+    if not os.path.exists("bacteria"):
+        os.mkdir("bacteria")
+    for bacterium in bacteria.get_all():
+        plt.figure(0).canvas.set_window_title(bacterium)
+        plt.xlabel('Measurement number')
+        plt.ylabel('Bacteria concentration')
+        for i in range(len(bacterium.get_measurements())):
+            plt.plot(i, bacterium.get_measurement(i), 'rs')
+        plt.savefig("bacteria/%s.png" %(bacterium.get_asv()))
+        print("saved bacteria/%s.png" %(bacterium.get_asv()))
+save_bacteria_images() 
 
 
 # Eksempel på hvad vi kan træne med, og hvad vi kan teste imod
