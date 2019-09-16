@@ -9,10 +9,13 @@ def main():
     # Hent bakterierne ind
     reader = BacteriaReader("bacteria.csv")
     bacteria = reader.read_from_csv()
+    bacterium = bacteria.get_bacteria_by_asv("ASV1")
+    print(bacterium.get_genus())
+    print(bacterium.get_measurements())
 
     #example_browse(bacteria)
     #example_plot(bacteria)
-    save_bacteria_images(bacteria)
+    #save_bacteria_images(bacteria)
     #train_test_split(bacteria)
 
 
@@ -79,6 +82,7 @@ def train_test_split(bacteria: BacteriaBrowser):
     #from sklearn.linear_model import LinearRegression
     #regressor = LinearRegression()  
     #regressor.fit(split_result.x_train, split_result.y_train)
+    #diabetes_y_pred = regressor.predict(diabetes_X_test)
 
 
 if __name__=='__main__':
