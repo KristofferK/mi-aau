@@ -16,14 +16,18 @@ namespace BacteriaRegression
                 Console.WriteLine(bacterium);
             }
 
-            Regression reg;
+            Regression reg = new Regression()
+            {
+                TrainSizePercentage = 85
+            };
 
-            reg = new Regression(new LinearRegression());
+            reg.RegressionModel = new LinearRegression();
             PrintResult("Linear", reg.PerformRegression(bacteria.ElementAt(1)));
+            Console.ReadLine();
 
             for (var i = 2; i < 15; i++)
             {
-                reg = new Regression(new PolynomialRegression(i));
+                reg.RegressionModel = new PolynomialRegression(i);
                 PrintResult($"Poly{i}", reg.PerformRegression(bacteria.ElementAt(1)));
                 Console.ReadLine();
             }
@@ -32,11 +36,19 @@ namespace BacteriaRegression
         static void PrintResult(string title, RegressionResult result)
         {
             Console.WriteLine("\n");
-            Console.WriteLine(title + ". Used " + result.FormulaUsed);
+            Console.WriteLine($"{title}. Used {result.FormulaUsed}");
             for (var i = 0; i < result.TestTimestamp.Length; i++)
             {
-                Console.WriteLine($"Timestamp {result.TestTimestamp[i]} is {result.TestMeasurements[i]} and predicted {result.PredictedMeasurements[i]}");
+                var off = GetDeviation(result.TestMeasurements[i], result.PredictionOnTestSet[i]);
+                Console.WriteLine($"Timestamp {result.TestTimestamp[i]} is {result.TestMeasurements[i]} "
+                    + $"and predicted {result.PredictionOnTestSet[i]}. That is {off}% off.");
             }
+            Console.WriteLine($"Error on training set: {result.Error}");
+        }
+
+        static double GetDeviation(double actualValue, double predictedValue)
+        {
+            return (predictedValue - actualValue) / actualValue * 100;
         }
     }
 }

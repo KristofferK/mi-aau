@@ -1,4 +1,5 @@
-﻿using BacteriaRegression.Models;
+﻿using Accord.Math.Optimization.Losses;
+using BacteriaRegression.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace BacteriaRegression.BusinessLogic.Regression
     {
         public IRegressionModel RegressionModel { get; set; }
         public int TrainSizePercentage { get; set; } = 80;
+
+        public Regression()
+        {
+
+        }
 
         public Regression(IRegressionModel regressionModel)
         {
@@ -31,7 +37,7 @@ namespace BacteriaRegression.BusinessLogic.Regression
             result.TrainTimestamp = trainX;
             result.TestMeasurements = testMeasurements;
             result.TestTimestamp = testX;
-
+            result.Error = new SquareLoss(trainMeasurements).Loss(result.PredictionOnTrainingSet);
             return result;
         }
     }

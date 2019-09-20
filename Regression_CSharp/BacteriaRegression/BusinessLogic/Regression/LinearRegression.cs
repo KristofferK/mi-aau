@@ -17,7 +17,8 @@ namespace BacteriaRegression.BusinessLogic.Regression
             return new RegressionResult
             {
                 FormulaUsed = regression.ToString("N1"),
-                PredictedMeasurements = testX.Select(regression.Transform).ToArray()
+                PredictionOnTestSet = testX.Select(regression.Transform).ToArray(),
+                PredictionOnTrainingSet = trainX.Select(regression.Transform).ToArray()
             };
         }
     }
