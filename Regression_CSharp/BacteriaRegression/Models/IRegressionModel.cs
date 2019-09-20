@@ -6,6 +6,6 @@ namespace BacteriaRegression.Models
 {
     public interface IRegressionModel
     {
-        PartialRegressionResult PerformRegression(double[] trainX, double[] trainY, double[] testX, double[] testY);
+        RegressionResult PerformRegression(double[] trainX, double[] trainY, double[] testX, double[] testY);
     }
 }

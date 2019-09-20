@@ -15,7 +15,7 @@ namespace BacteriaRegression
                 Console.WriteLine(bacterium);
             }
 
-            Regression regression = new Regression(null);
+            Regression regression = new Regression(new LinearRegression());
             var regressionResult = regression.PerformRegression(bacteria.ElementAt(0));
             Console.WriteLine("Used " + regressionResult.FormulaUsed);
             for (var i = 0; i < regressionResult.TestTimestamp.Length; i++)

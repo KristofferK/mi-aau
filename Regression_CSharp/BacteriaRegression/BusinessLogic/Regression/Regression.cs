@@ -1,7 +1,4 @@
-﻿
-using Accord.MachineLearning;
-using Accord.Statistics.Models.Regression.Linear;
-using BacteriaRegression.Models;
+﻿using BacteriaRegression.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,22 +25,12 @@ namespace BacteriaRegression.BusinessLogic.Regression
             var trainX = Enumerable.Range(0, trainSize).Select(e => (double)e).ToArray();
             var testX = Enumerable.Range(trainSize, testMeasurements.Length).Select(e => (double)e).ToArray();
 
-            OrdinaryLeastSquares ols = new OrdinaryLeastSquares();
-            SimpleLinearRegression regression = ols.Learn(trainX, trainMeasurements);
+            var result = RegressionModel.PerformRegression(trainX, trainMeasurements, testX, testMeasurements);
 
-            //var ls = new PolynomialLeastSquares()
-            //{
-            //    Degree = 2
-            //};
-            //ITransform poly = ls.Learn(trainX, trainMeasurements);
-
-            var result = new RegressionResult();
-            result.FormulaUsed = regression.ToString("N1");
             result.TrainMeasurements = trainMeasurements;
             result.TrainTimestamp = trainX;
             result.TestMeasurements = testMeasurements;
             result.TestTimestamp = testX;
-            result.PredictedMeasurements = testX.Select(regression.Transform).ToArray();
 
             return result;
         }
