@@ -9,7 +9,7 @@ namespace BacteriaRegression.Models
         public string ASV { get; set; }
         public string Genus { get; set; }
         public string Class { get; set; }
-        public List<float> Measurements { get; set; }
+        public List<double> Measurements { get; set; }
 
         public override string ToString()
         {
