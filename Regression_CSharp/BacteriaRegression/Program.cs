@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BacteriaRegression.BusinessLogic;
+using System;
 
 namespace BacteriaRegression
 {
@@ -6,7 +7,11 @@ namespace BacteriaRegression
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var bacteria = BacteriaImporter.Import(5);
+            foreach (var bacterium in bacteria)
+            {
+                Console.WriteLine(bacterium);
+            }
         }
     }
 }

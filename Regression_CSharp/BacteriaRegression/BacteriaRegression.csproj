@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Data\damhusaen_normalized.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
