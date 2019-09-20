@@ -1,5 +1,6 @@
 ﻿using BacteriaRegression.BusinessLogic;
 using BacteriaRegression.BusinessLogic.Regression;
+using BacteriaRegression.Models;
 using System;
 using System.Linq;
 
@@ -15,12 +16,26 @@ namespace BacteriaRegression
                 Console.WriteLine(bacterium);
             }
 
-            Regression regression = new Regression(new LinearRegression());
-            var regressionResult = regression.PerformRegression(bacteria.ElementAt(0));
-            Console.WriteLine("Used " + regressionResult.FormulaUsed);
-            for (var i = 0; i < regressionResult.TestTimestamp.Length; i++)
+            Regression reg;
+
+            reg = new Regression(new LinearRegression());
+            PrintResult("Linear", reg.PerformRegression(bacteria.ElementAt(1)));
+
+            for (var i = 2; i < 15; i++)
             {
-                Console.WriteLine($"Timestamp {regressionResult.TestTimestamp[i]} is {regressionResult.TestMeasurements[i]} and predicted {regressionResult.PredictedMeasurements[i]}");
+                reg = new Regression(new PolynomialRegression(i));
+                PrintResult($"Poly{i}", reg.PerformRegression(bacteria.ElementAt(1)));
+                Console.ReadLine();
+            }
+        }
+
+        static void PrintResult(string title, RegressionResult result)
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine(title + ". Used " + result.FormulaUsed);
+            for (var i = 0; i < result.TestTimestamp.Length; i++)
+            {
+                Console.WriteLine($"Timestamp {result.TestTimestamp[i]} is {result.TestMeasurements[i]} and predicted {result.PredictedMeasurements[i]}");
             }
         }
     }
