@@ -39,9 +39,12 @@ namespace BacteriaRegression
             Console.WriteLine($"{title}. Used {result.FormulaUsed}");
             for (var i = 0; i < result.TestTimestamp.Length; i++)
             {
-                var off = GetDeviation(result.TestMeasurements[i], result.PredictionOnTestSet[i]);
-                Console.WriteLine($"Timestamp {result.TestTimestamp[i]} is {result.TestMeasurements[i]} "
-                    + $"and predicted {result.PredictionOnTestSet[i]}. That is {off}% off.");
+                Console.WriteLine(String.Format("Timestamp {0} is {1:0.00} and predicted {2:0.00}. That is {3:0.000}% off",
+                    result.TestTimestamp[i],
+                    result.TestMeasurements[i],
+                    result.PredictionOnTestSet[i],
+                    GetDeviation(result.TestMeasurements[i], result.PredictionOnTestSet[i])
+                ));
             }
             Console.WriteLine($"Error on training set: {result.Error}");
         }
