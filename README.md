@@ -1,2 +1,2 @@
 # mi-aau
-MI course at AAU
+Machine Intelligence course at Aalborg University. Pronounced "Meow".
