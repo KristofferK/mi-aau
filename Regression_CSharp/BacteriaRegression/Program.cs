@@ -39,7 +39,7 @@ namespace BacteriaRegression
             Console.WriteLine($"{title}. Used {result.FormulaUsed}");
             for (var i = 0; i < result.TestTimestamp.Length; i++)
             {
-                Console.WriteLine(String.Format("Timestamp {0} is {1:0.00} and predicted {2:0.00}. That is {3:0.000}% off",
+                Console.WriteLine(String.Format("Timestamp {0} is {1:0.00} and predicted {2:0.00}. That is {3:0.0000}% off",
                     result.TestTimestamp[i],
                     result.TestMeasurements[i],
                     result.PredictionOnTestSet[i],
@@ -51,7 +51,12 @@ namespace BacteriaRegression
 
         static double GetDeviation(double actualValue, double predictedValue)
         {
-            return (predictedValue - actualValue) / actualValue * 100;
+            var val = (predictedValue - actualValue) / actualValue * 100;
+            if (double.IsInfinity(val))
+            {
+                return 0;
+            }
+            return val;
         }
     }
 }
