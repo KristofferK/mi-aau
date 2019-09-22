@@ -35,18 +35,28 @@ namespace BacteriaRegression
 
         static void PrintResult(string title, RegressionResult result)
         {
+            double matchSum = 0;
             Console.WriteLine("\n");
             Console.WriteLine($"{title}. Used {result.FormulaUsed}");
             for (var i = 0; i < result.TestTimestamp.Length; i++)
             {
-                Console.WriteLine(String.Format("Timestamp {0} is {1:0.00} and predicted {2:0.00}. That is {3:0.0000}% off",
+                var match = GetMatch(result.TestMeasurements[i], result.PredictionOnTestSet[i]);
+                Console.WriteLine(String.Format("Timestamp {0} is {1:0.00} and predicted {2:0.00}. Prediction is {3:0.0000}% of actual value",
                     result.TestTimestamp[i],
                     result.TestMeasurements[i],
                     result.PredictionOnTestSet[i],
-                    GetDeviation(result.TestMeasurements[i], result.PredictionOnTestSet[i])
+                    match
                 ));
+                matchSum += match;
             }
+            var matchAverage = matchSum / result.TestTimestamp.Length;
             Console.WriteLine($"Error on training set: {result.Error}");
+            Console.WriteLine($"Average match on test set (closer to 100 is better): {Math.Round(matchAverage, 4)}");
+        }
+
+        static double GetMatch(double actualValue, double predictedValue)
+        {
+            return (predictedValue / actualValue) * 100;
         }
 
         static double GetDeviation(double actualValue, double predictedValue)
