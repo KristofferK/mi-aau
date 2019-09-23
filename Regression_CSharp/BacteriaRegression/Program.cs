@@ -10,11 +10,15 @@ namespace BacteriaRegression
     {
         static void Main(string[] args)
         {
+            PredictableBacteriaDetector.Detect(500);
+            Console.ReadLine();
+
             var bacteria = BacteriaImporter.Import(5);
-            foreach (var bacterium in bacteria)
-            {
-                Console.WriteLine(bacterium);
-            }
+
+            //foreach (var bacterium in bacteria)
+            //{
+            //    Console.WriteLine(bacterium);
+            //}
 
             Regression reg = new Regression()
             {
@@ -25,19 +29,20 @@ namespace BacteriaRegression
             //PrintResult("Linear", reg.PerformRegression(bacteria.ElementAt(1)));
             //Console.ReadLine();
 
+            var bacterium = bacteria.ElementAt(0);
             for (var i = 1; i < 15; i++)
             {
                 reg.RegressionModel = new PolynomialRegression(i);
-                PrintResult($"Poly{i}", reg.PerformRegression(bacteria.ElementAt(1)));
+                PrintResult($"Poly{i}", bacterium, reg.PerformRegression(bacterium));
                 Console.ReadLine();
             }
         }
 
-        static void PrintResult(string title, RegressionResult result)
+        static void PrintResult(string title, Bacterium bacterium, RegressionResult result)
         {
             double matchSum = 0;
             Console.WriteLine("\n");
-            Console.WriteLine($"{title}. Used {result.FormulaUsed}");
+            Console.WriteLine($"{title} on {bacterium.ASV}. Used {result.FormulaUsed}");
             for (var i = 0; i < result.TestTimestamp.Length; i++)
             {
                 var match = GetMatch(result.TestMeasurements[i], result.PredictionOnTestSet[i]);
