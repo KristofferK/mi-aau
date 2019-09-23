@@ -18,7 +18,7 @@ namespace BacteriaRegression
 
             Regression reg = new Regression()
             {
-                TrainSizePercentage = 85
+                TrainSizePercentage = 99
             };
 
             reg.RegressionModel = new LinearRegression();

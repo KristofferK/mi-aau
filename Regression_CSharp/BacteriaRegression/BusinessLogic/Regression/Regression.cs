@@ -10,7 +10,7 @@ namespace BacteriaRegression.BusinessLogic.Regression
     public class Regression
     {
         public IRegressionModel RegressionModel { get; set; }
-        public int TrainSizePercentage { get; set; } = 80;
+        public double TrainSizePercentage { get; set; } = 80;
 
         public Regression()
         {
