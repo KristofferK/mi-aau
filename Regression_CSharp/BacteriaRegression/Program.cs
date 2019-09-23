@@ -10,7 +10,7 @@ namespace BacteriaRegression
     {
         static void Main(string[] args)
         {
-            PredictableBacteriaDetector.Detect(500);
+            PredictableBacteriaDetector.Detect(500, 99);
             Console.ReadLine();
 
             var bacteria = BacteriaImporter.Import(5);

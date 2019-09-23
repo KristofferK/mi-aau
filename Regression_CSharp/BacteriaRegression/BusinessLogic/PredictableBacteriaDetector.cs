@@ -9,13 +9,14 @@ namespace BacteriaRegression.BusinessLogic
 {
     public class PredictableBacteriaDetector
     {
-        public static void Detect(int importSize)
+        public static void Detect(int importSize, double trainSizePercentage)
         {
+            Console.WriteLine($"Running PredictableBacteriaDetector on importSize={importSize} and trainSizePercentage={trainSizePercentage}.");
             var bacteria = BacteriaImporter.Import(importSize);
 
             var reg = new Regression.Regression()
             {
-                TrainSizePercentage = 99
+                TrainSizePercentage = trainSizePercentage
             };
 
             foreach (var bacterium in bacteria)
