@@ -21,11 +21,11 @@ namespace BacteriaRegression
                 TrainSizePercentage = 99
             };
 
-            reg.RegressionModel = new LinearRegression();
-            PrintResult("Linear", reg.PerformRegression(bacteria.ElementAt(1)));
-            Console.ReadLine();
+            //reg.RegressionModel = new LinearRegression();
+            //PrintResult("Linear", reg.PerformRegression(bacteria.ElementAt(1)));
+            //Console.ReadLine();
 
-            for (var i = 2; i < 15; i++)
+            for (var i = 1; i < 15; i++)
             {
                 reg.RegressionModel = new PolynomialRegression(i);
                 PrintResult($"Poly{i}", reg.PerformRegression(bacteria.ElementAt(1)));
