@@ -40,6 +40,7 @@ namespace BacteriaRegression.BusinessLogic
             if (matchAverage > 98.5 && matchAverage < 101.5)
             {
                 Console.WriteLine($"Good match found on {bacterium.ASV} with the {title} model. Used {result.FormulaUsed}");
+                Console.WriteLine($"Error rate on training set {result.Error}");
                 Console.WriteLine($"Average match on test set (closer to 100 is better): {Math.Round(matchAverage, 4)}");
                 Console.WriteLine("\n");
             }
