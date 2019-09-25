@@ -13,9 +13,12 @@ def main():
     print(bacterium.get_genus())
     print(bacterium.get_measurements())
 
+    bacterium.get_asv()
+
     #example_browse(bacteria)
     #example_plot(bacteria)
     #save_bacteria_images(bacteria)
+    save_bacteria_dat(bacteria)
     #train_test_split(bacteria)
 
 
@@ -64,6 +67,39 @@ def save_bacteria_images(bacteria: BacteriaBrowser):
     pool = multiprocessing.Pool()
     pool.map(print_image, bacteria.get_all())
 
+# Hent alle baktierer ned  og gem dem som dat filer
+def generate_dat(bacterium):
+    path = "bacteria_dat/%s_complete.dat" %(bacterium.get_asv())
+    path_train = "bacteria_dat/%s_train.dat" %(bacterium.get_asv())
+    path_test = "bacteria_dat/%s_test.dat" %(bacterium.get_asv())
+    if os.path.isfile(path):
+        print("skipped %s" %(path))
+        return
+    
+    with open(path, 'w') as file:
+        with open(path_train, 'w') as file_train:
+            with open(path_test, 'w') as file_test:
+                contentComplete = ""
+                contentTrain = ""
+                contentTest = ""
+                length = len(bacterium.get_measurements())
+                for i in range(length):
+                    contentComplete = contentComplete + str(i) + " " + str(bacterium.get_measurement(i)) + "\n"
+                    if i >= length - 2:
+                        contentTest = contentTest + str(i) + " " + str(bacterium.get_measurement(i)) + "\n"
+                    else:
+                        contentTrain = contentTrain + str(i) + " " + str(bacterium.get_measurement(i)) + "\n"
+                file.write(contentComplete.strip())
+                file_train.write(contentTrain.strip())
+                file_test.write(contentTest.strip())
+    print("saved %s" %(path))
+
+def save_bacteria_dat(bacteria: BacteriaBrowser):
+    if not os.path.exists("bacteria_dat"):
+        os.mkdir("bacteria_dat")
+    pool = multiprocessing.Pool()
+    pool.map(generate_dat, bacteria.get_all()[0:20])
+
 
 def train_test_split(bacteria: BacteriaBrowser):
     # Eksempel på hvad vi kan træne med, og hvad vi kan teste imod
@@ -83,7 +119,6 @@ def train_test_split(bacteria: BacteriaBrowser):
     #regressor = LinearRegression()  
     #regressor.fit(split_result.x_train, split_result.y_train)
     #diabetes_y_pred = regressor.predict(diabetes_X_test)
-
 
 if __name__=='__main__':
     main()

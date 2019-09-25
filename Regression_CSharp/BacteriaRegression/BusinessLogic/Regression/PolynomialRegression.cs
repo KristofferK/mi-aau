@@ -26,7 +26,7 @@ namespace BacteriaRegression.BusinessLogic.Regression
 
             return new RegressionResult
             {
-                FormulaUsed = regression.ToString("N1"),
+                FormulaUsed = regression.ToString().Replace("y(x)", "y").Replace("x", " * x"),
                 PredictionOnTestSet = testX.Select(regression.Transform).ToArray(),
                 PredictionOnTrainingSet = trainX.Select(regression.Transform).ToArray()
             };
