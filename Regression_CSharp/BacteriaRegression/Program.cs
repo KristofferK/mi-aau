@@ -1,4 +1,7 @@
-﻿using BacteriaRegression.BusinessLogic;
+﻿using Accord.MachineLearning.VectorMachines;
+using Accord.MachineLearning.VectorMachines.Learning;
+using Accord.Statistics.Kernels;
+using BacteriaRegression.BusinessLogic;
 using BacteriaRegression.BusinessLogic.Regression;
 using BacteriaRegression.Models;
 using System;
@@ -10,6 +13,21 @@ namespace BacteriaRegression
     {
         static void Main(string[] args)
         {
+            /*
+             * Se http://accord-framework.net/docs/html/T_Accord_MachineLearning_VectorMachines_Learning_SequentialMinimalOptimizationRegression.htm
+             * 
+            var learn = new SequentialMinimalOptimizationRegression<Gaussian>()
+            {
+                Kernel = new Gaussian(),
+                Complexity = 100
+            };
+
+            // Run the learning algorithm
+            var input = new double[] { 1,2,3,4,5};
+            var output = new double[] { 1.2112, 1.301, 1.401, 1.001, 1.2010 };
+            SupportVectorMachine<Gaussian> svm = learn.Learn(input, output);
+            */
+
             PredictableBacteriaDetector.Detect(500, 99);
             Console.ReadLine();
 
