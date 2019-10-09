@@ -1,4 +1,5 @@
-﻿using Accord.Statistics.Kernels;
+﻿using Accord.Math;
+using Accord.Statistics.Kernels;
 using BacteriaRegression.BusinessLogic;
 using BacteriaRegression.BusinessLogic.Regression;
 using BacteriaRegression.Models;
@@ -11,10 +12,21 @@ namespace BacteriaRegression
     {
         static void Main(string[] args)
         {
-            PredictableBacteriaDetector.Detect(500, 99);
+            var bacteria = BacteriaImporter.Import(25);
+
+            for (var i = 0; i < bacteria.Count; i++)
+            {
+                var cosineDistance = 1 - Distance.Cosine(bacteria[0].Measurements.ToArray(), bacteria[i].Measurements.ToArray());
+                if (cosineDistance > 0.9) Console.ForegroundColor = ConsoleColor.Green;
+                else if (cosineDistance < 0.8) Console.ForegroundColor = ConsoleColor.Red;
+                else Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(string.Format("{0,6} ift {1,6}: {2:0.00000}", bacteria[0].ASV, bacteria[i].ASV, cosineDistance));
+            }
+
             Console.ReadLine();
 
-            var bacteria = BacteriaImporter.Import(5);
+            PredictableBacteriaDetector.Detect(500, 99);
+            Console.ReadLine();
 
             //foreach (var bacterium in bacteria)
             //{
