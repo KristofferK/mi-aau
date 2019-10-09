@@ -15,7 +15,7 @@ namespace BacteriaPlotting
         {
             InitializeComponent();
 
-            var bacteria = BacteriaImporter.Import(10);
+            var bacteria = BacteriaImporter.Import(15);
 
             
 
