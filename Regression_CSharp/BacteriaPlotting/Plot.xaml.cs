@@ -3,6 +3,9 @@ using System.Windows.Controls;
 using LiveCharts;
 using LiveCharts.Defaults;
 using BacteriaRegressionLibrary.BusinessLogic;
+using LiveCharts.Wpf;
+using System.Collections.Generic;
+using LiveCharts.Helpers;
 
 namespace BacteriaPlotting
 {
@@ -20,7 +23,14 @@ namespace BacteriaPlotting
             Series1.Title = $"{bacteria[3].ASV} vs {bacteria[12].ASV}";
             Series2.Title = $"{bacteria[0].ASV} vs {bacteria[1].ASV}";
 
-            // BacteriaChart.Series.
+            BacteriaChart.Series.Add(new ScatterSeries
+            {
+                Title = "Hej"
+            });
+
+            var k = BacteriaChart.Series[2];
+            k.Values = new ChartValues<ObservablePoint>();
+            k.Values.Add(new ObservablePoint(3, 3));
 
             for (int i = 0; i < bacteria[3].Measurements.Count; i++)
             {
