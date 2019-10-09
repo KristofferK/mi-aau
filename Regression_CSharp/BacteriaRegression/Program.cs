@@ -1,12 +1,10 @@
-﻿using Accord.Math;
-using Accord.Statistics.Kernels;
-using BacteriaRegression.BusinessLogic;
-using BacteriaRegression.BusinessLogic.Regression;
-using BacteriaRegression.Models;
+﻿using BacteriaRegressionLibrary.BusinessLogic;
+using BacteriaRegressionLibrary.BusinessLogic.Regression;
+using BacteriaRegressionLibrary.Models;
 using System;
 using System.Linq;
 
-namespace BacteriaRegression
+namespace BacteriaRegressionLibrary
 {
     class Program
     {
@@ -14,40 +12,18 @@ namespace BacteriaRegression
         {
             var bacteria = BacteriaImporter.Import(25);
 
-            for (var i = 0; i < bacteria.Count; i++)
+            /*for (var i = 0; i < bacteria.Count; i++)
             {
                 var cosineDistance = 1 - Distance.Cosine(bacteria[0].Measurements.ToArray(), bacteria[i].Measurements.ToArray());
                 if (cosineDistance > 0.9) Console.ForegroundColor = ConsoleColor.Green;
                 else if (cosineDistance < 0.8) Console.ForegroundColor = ConsoleColor.Red;
                 else Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(string.Format("{0,6} ift {1,6}: {2:0.00000}", bacteria[0].ASV, bacteria[i].ASV, cosineDistance));
-            }
+            }*/
 
-            Console.ReadLine();
-
-            PredictableBacteriaDetector.Detect(500, 99);
-            Console.ReadLine();
-
-            //foreach (var bacterium in bacteria)
-            //{
-            //    Console.WriteLine(bacterium);
-            //}
-
-            Regression reg = new Regression()
+            foreach (var bacterium in bacteria)
             {
-                TrainSizePercentage = 85
-            };
-
-            //reg.RegressionModel = new LinearRegression();
-            //PrintResult("Linear", reg.PerformRegression(bacteria.ElementAt(1)));
-            //Console.ReadLine();
-
-            var bacterium = bacteria.ElementAt(0);
-            for (var i = 1; i < 15; i++)
-            {
-                reg.RegressionModel = new PolynomialRegression(i);
-                PrintResult($"Poly{i}", bacterium, reg.PerformRegression(bacterium));
-                Console.ReadLine();
+                Console.WriteLine("Found " + bacterium.ASV);
             }
         }
 

@@ -1,11 +1,11 @@
 ﻿using Accord.Statistics.Models.Regression.Linear;
-using BacteriaRegression.Models;
+using BacteriaRegressionLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BacteriaRegression.BusinessLogic.Regression
+namespace BacteriaRegressionLibrary.BusinessLogic.Regression
 {
     class PolynomialRegression : IRegressionModel
     {

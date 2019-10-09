@@ -1,11 +1,11 @@
-﻿using BacteriaRegression.BusinessLogic.Regression;
-using BacteriaRegression.Models;
+﻿using BacteriaRegressionLibrary.BusinessLogic.Regression;
+using BacteriaRegressionLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BacteriaRegression.BusinessLogic
+namespace BacteriaRegressionLibrary.BusinessLogic
 {
     public class PredictableBacteriaDetector
     {

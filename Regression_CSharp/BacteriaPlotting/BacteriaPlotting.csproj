@@ -107,5 +107,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BacteriaRegressionLibrary\BacteriaRegressionLibrary.csproj">
+      <Project>{2a097026-c42f-4e38-8ce2-4e69751ffec1}</Project>
+      <Name>BacteriaRegressionLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

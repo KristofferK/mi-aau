@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BacteriaRegression.Models
+namespace BacteriaRegressionLibrary.Models
 {
     public class Bacterium
     {

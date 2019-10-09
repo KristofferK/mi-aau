@@ -1,11 +1,11 @@
-﻿using BacteriaRegression.Models;
+﻿using BacteriaRegressionLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace BacteriaRegression.BusinessLogic
+namespace BacteriaRegressionLibrary.BusinessLogic
 {
     public static class BacteriaImporter
     {

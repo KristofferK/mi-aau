@@ -6,14 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Accord" Version="3.8.0" />
-    <PackageReference Include="Accord.Statistics" Version="3.8.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Data\damhusaen_normalized.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\BacteriaRegressionLibrary\BacteriaRegressionLibrary.csproj" />
   </ItemGroup>
 
 </Project>
