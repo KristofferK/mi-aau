@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using LiveCharts;
 using LiveCharts.Defaults;
+using BacteriaRegressionLibrary.BusinessLogic;
 
 namespace BacteriaPlotting
 {
@@ -14,12 +15,16 @@ namespace BacteriaPlotting
         {
             InitializeComponent();
 
+            var bacteria = BacteriaImporter.Import(10);
+
+            
+
             var r = new Random();
             ValuesA = new ChartValues<ObservablePoint>();
 
-            for (var i = 0; i < 20; i++)
+            for (int i = 0; i < bacteria[3].Measurements.Count; i++)
             {
-                ValuesA.Add(new ObservablePoint(r.NextDouble() * 10, r.NextDouble() * 10));
+                ValuesA.Add(new ObservablePoint(bacteria[3].Measurements[i], bacteria[12].Measurements[i]));
             }
 
             DataContext = this;
