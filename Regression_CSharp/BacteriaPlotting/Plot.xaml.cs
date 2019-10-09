@@ -7,6 +7,7 @@ using LiveCharts.Wpf;
 using System.Collections.Generic;
 using LiveCharts.Helpers;
 using BacteriaRegressionLibrary.Models;
+using System.Windows;
 
 namespace BacteriaPlotting
 {
@@ -15,6 +16,10 @@ namespace BacteriaPlotting
     /// </summary>
     public partial class Plot : UserControl
     {
+        public List<Bacterium> AvailableBacteria { get; set; }
+        public Bacterium Bacteria1 { get; set; }
+        public Bacterium Bacteria2 { get; set; }
+
         public Plot()
         {
             InitializeComponent();
@@ -22,8 +27,9 @@ namespace BacteriaPlotting
             BacteriaChart.Series.RemoveAt(0);
 
             var bacteria = BacteriaImporter.Import(15);
+            AvailableBacteria = bacteria;
             ShowBacteria(bacteria[3], bacteria[12]);
-            ShowBacteria(bacteria[0], bacteria[1]);
+            ShowBacteria(bacteria[12], bacteria[3]);
 
             DataContext = this;
         }
@@ -42,6 +48,21 @@ namespace BacteriaPlotting
             }
 
             BacteriaChart.Series.Add(series);
+        }
+
+        private void BtnMatchBacteria_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (Bacteria1 == null || Bacteria2 == null)
+            {
+                MessageBox.Show("Please select bacteria to match");
+                return;
+            }
+            ShowBacteria(Bacteria1, Bacteria2);
+        }
+
+        private void BtnClearBacteria_Clicked(object sender, RoutedEventArgs e)
+        {
+            BacteriaChart.Series = new SeriesCollection();
         }
     }
 }

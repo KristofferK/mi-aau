@@ -12,7 +12,26 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <lvc:CartesianChart Grid.Row="1" LegendLocation="Bottom" Name="BacteriaChart">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <StackPanel>
+                <Label>Bacterium 1</Label>
+                <ComboBox ItemsSource="{Binding Path=AvailableBacteria}"
+                    DisplayMemberPath="ASV"
+                    SelectedValue="{Binding Path=Bacteria1}"></ComboBox>
+                <Label>Bacterium 2</Label>
+                <ComboBox ItemsSource="{Binding Path=AvailableBacteria}"
+                    DisplayMemberPath="ASV"
+                    SelectedValue="{Binding Path=Bacteria2}"></ComboBox>
+                <Button Click="BtnMatchBacteria_Clicked">Match</Button>
+                <Button Click="BtnClearBacteria_Clicked">Clear</Button>
+            </StackPanel>
+        </Grid>
+        <lvc:CartesianChart Grid.Column="2" Grid.Row="1" LegendLocation="Bottom" Name="BacteriaChart">
             <lvc:CartesianChart.Series>
                 <lvc:ScatterSeries Title="" Values="" />
             </lvc:CartesianChart.Series>
