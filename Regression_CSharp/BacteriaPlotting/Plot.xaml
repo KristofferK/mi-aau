@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:BacteriaPlotting"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:Plot}">
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="#333"
+             Foreground="#eee"
+             d:DataContext="{d:DesignInstance local:Plot}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -19,11 +22,11 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="1" Grid.Column="1">
             <StackPanel>
-                <Label>Bacterium 1</Label>
+                <Label Foreground="#eee">Bacterium 1</Label>
                 <ComboBox ItemsSource="{Binding Path=AvailableBacteria}"
                     DisplayMemberPath="ASV"
                     SelectedValue="{Binding Path=Bacteria1}"></ComboBox>
-                <Label>Bacterium 2</Label>
+                <Label Foreground="#eee">Bacterium 2</Label>
                 <ComboBox ItemsSource="{Binding Path=AvailableBacteria}"
                     DisplayMemberPath="ASV"
                     SelectedValue="{Binding Path=Bacteria2}"></ComboBox>

@@ -24,7 +24,7 @@ namespace BacteriaPlotting
         {
             InitializeComponent();
 
-            BacteriaChart.Series.RemoveAt(0);
+            ResetSeries();
 
             var bacteria = BacteriaImporter.Import(15);
             AvailableBacteria = bacteria;
@@ -61,6 +61,11 @@ namespace BacteriaPlotting
         }
 
         private void BtnClearBacteria_Clicked(object sender, RoutedEventArgs e)
+        {
+            ResetSeries();
+        }
+
+        private void ResetSeries()
         {
             BacteriaChart.Series = new SeriesCollection();
         }
