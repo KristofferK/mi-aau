@@ -6,6 +6,7 @@ using BacteriaRegressionLibrary.BusinessLogic;
 using LiveCharts.Wpf;
 using System.Collections.Generic;
 using LiveCharts.Helpers;
+using BacteriaRegressionLibrary.Models;
 
 namespace BacteriaPlotting
 {
@@ -18,30 +19,29 @@ namespace BacteriaPlotting
         {
             InitializeComponent();
 
+            BacteriaChart.Series.RemoveAt(0);
+
             var bacteria = BacteriaImporter.Import(15);
-
-            Series1.Title = $"{bacteria[3].ASV} vs {bacteria[12].ASV}";
-            Series2.Title = $"{bacteria[0].ASV} vs {bacteria[1].ASV}";
-
-            BacteriaChart.Series.Add(new ScatterSeries
-            {
-                Title = "Hej"
-            });
-
-            var k = BacteriaChart.Series[2];
-            k.Values = new ChartValues<ObservablePoint>();
-            k.Values.Add(new ObservablePoint(3, 3));
-
-            for (int i = 0; i < bacteria[3].Measurements.Count; i++)
-            {
-                ValuesA.Add(new ObservablePoint(bacteria[3].Measurements[i], bacteria[12].Measurements[i]));
-                ValuesB.Add(new ObservablePoint(bacteria[0].Measurements[i], bacteria[1].Measurements[i]));
-            }
+            ShowBacteria(bacteria[3], bacteria[12]);
+            ShowBacteria(bacteria[0], bacteria[1]);
 
             DataContext = this;
         }
 
-        public ChartValues<ObservablePoint> ValuesA { get; set; } = new ChartValues<ObservablePoint>();
-        public ChartValues<ObservablePoint> ValuesB { get; set; } = new ChartValues<ObservablePoint>();
+        private void ShowBacteria(Bacterium b1, Bacterium b2)
+        {
+            var series = new ScatterSeries
+            {
+                Title = $"{b1.ASV} vs {b2.ASV}",
+                Values = new ChartValues<ObservablePoint>()
+            };
+
+            for (int i = 0; i < b1.Measurements.Count; i++)
+            {
+                series.Values.Add(new ObservablePoint(b1.Measurements[i], b2.Measurements[i]));
+            }
+
+            BacteriaChart.Series.Add(series);
+        }
     }
 }
