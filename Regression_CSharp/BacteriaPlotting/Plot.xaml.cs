@@ -17,8 +17,8 @@ namespace BacteriaPlotting
     public partial class Plot : UserControl
     {
         public List<Bacterium> AvailableBacteria { get; set; }
-        public Bacterium Bacteria1 { get; set; }
-        public Bacterium Bacteria2 { get; set; }
+        public Bacterium Bacterium1 { get; set; }
+        public Bacterium Bacterium2 { get; set; }
 
         public Plot()
         {
@@ -26,10 +26,12 @@ namespace BacteriaPlotting
 
             ResetSeries();
 
-            var bacteria = BacteriaImporter.Import(15);
-            AvailableBacteria = bacteria;
-            ShowBacteria(bacteria[3], bacteria[12]);
-            ShowBacteria(bacteria[12], bacteria[3]);
+            AvailableBacteria = BacteriaImporter.Import(15);
+            ShowBacteria(AvailableBacteria[3], AvailableBacteria[12]);
+            ShowBacteria(AvailableBacteria[12], AvailableBacteria[3]);
+
+            Bacterium1 = AvailableBacteria[3];
+            Bacterium2 = AvailableBacteria[12];
 
             DataContext = this;
         }
@@ -52,12 +54,12 @@ namespace BacteriaPlotting
 
         private void BtnMatchBacteria_Clicked(object sender, RoutedEventArgs e)
         {
-            if (Bacteria1 == null || Bacteria2 == null)
+            if (Bacterium1 == null || Bacterium2 == null)
             {
                 MessageBox.Show("Please select bacteria to match");
                 return;
             }
-            ShowBacteria(Bacteria1, Bacteria2);
+            ShowBacteria(Bacterium1, Bacterium2);
         }
 
         private void BtnClearBacteria_Clicked(object sender, RoutedEventArgs e)

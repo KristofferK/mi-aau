@@ -25,11 +25,11 @@
                 <Label Foreground="#eee">Bacterium 1</Label>
                 <ComboBox ItemsSource="{Binding Path=AvailableBacteria}"
                     DisplayMemberPath="ASV"
-                    SelectedValue="{Binding Path=Bacteria1}"></ComboBox>
+                    SelectedValue="{Binding Path=Bacterium1}"></ComboBox>
                 <Label Foreground="#eee">Bacterium 2</Label>
                 <ComboBox ItemsSource="{Binding Path=AvailableBacteria}"
                     DisplayMemberPath="ASV"
-                    SelectedValue="{Binding Path=Bacteria2}"></ComboBox>
+                    SelectedValue="{Binding Path=Bacterium2}"></ComboBox>
                 <Button Click="BtnMatchBacteria_Clicked">Match</Button>
                 <Button Click="BtnClearBacteria_Clicked">Clear</Button>
             </StackPanel>
