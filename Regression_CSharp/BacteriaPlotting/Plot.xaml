@@ -12,9 +12,10 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <lvc:CartesianChart Grid.Row="1" LegendLocation="Bottom">
+        <lvc:CartesianChart Grid.Row="1" LegendLocation="Bottom" Name="BacteriaChart">
             <lvc:CartesianChart.Series>
-                <lvc:ScatterSeries Title="Series A" Values="{Binding ValuesA}" />
+                <lvc:ScatterSeries Name="Series1" Title="Series A" Values="{Binding ValuesA}" />
+                <lvc:ScatterSeries Name="Series2" Title="Series B" Values="{Binding ValuesB}" />
             </lvc:CartesianChart.Series>
             <lvc:CartesianChart.AxisY>
                 <!--setting the axis unit improved the labels rounding rule-->
