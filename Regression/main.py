@@ -17,9 +17,9 @@ def main():
 
     #example_browse(bacteria)
     #example_plot(bacteria)
-    #save_bacteria_images(bacteria)
-    save_bacteria_dat(bacteria)
-    #train_test_split(bacteria)
+    save_bacteria_images(bacteria)
+    #save_bacteria_dat(bacteria)
+    train_test_split(bacteria)
 
 
 # Eksempel på hvordan vi kan hente alle baktierer der har en bestemt slægt eller klasse.
@@ -48,7 +48,7 @@ def example_plot(bacteria: BacteriaBrowser):
 
 # Hent alle bakterier ned og gem dem som billede
 def print_image(bacterium):
-    path = "bacteria/%s.png" %(bacterium.get_asv())
+    path = "bacteria_plots/%s.png" %(bacterium.get_asv())
     if os.path.isfile(path):
         print("skipped %s" %(path))
         return
@@ -62,8 +62,8 @@ def print_image(bacterium):
     print("saved %s" %(path))
 
 def save_bacteria_images(bacteria: BacteriaBrowser):
-    if not os.path.exists("bacteria"):
-        os.mkdir("bacteria")
+    if not os.path.exists("bacteria_plots"):
+        os.mkdir("bacteria_plots")
     pool = multiprocessing.Pool()
     pool.map(print_image, bacteria.get_all())
 
