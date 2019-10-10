@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using LiveCharts.Helpers;
 using BacteriaRegressionLibrary.Models;
 using System.Windows;
+using System.Windows.Media;
+using System.Linq;
 
 namespace BacteriaPlotting
 {
@@ -38,18 +40,12 @@ namespace BacteriaPlotting
 
         private void ShowBacteria(Bacterium b1, Bacterium b2)
         {
-            var series = new ScatterSeries
+            var merged = BacteriaMerger.MergeBacteria(b1, b2);
+            BacteriaChart.Series.Add(new ScatterSeries
             {
-                Title = $"{b1.ASV} vs {b2.ASV}",
-                Values = new ChartValues<ObservablePoint>()
-            };
-
-            for (int i = 0; i < b1.Measurements.Count; i++)
-            {
-                series.Values.Add(new ObservablePoint(b1.Measurements[i], b2.Measurements[i]));
-            }
-
-            BacteriaChart.Series.Add(series);
+                Title = merged.ToString(),
+                Values = new ChartValues<ObservablePoint>(merged.Points.Select(e => new ObservablePoint(e.Item1, e.Item2)))
+            });
         }
 
         private void BtnMatchBacteria_Clicked(object sender, RoutedEventArgs e)
