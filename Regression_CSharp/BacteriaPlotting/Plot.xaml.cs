@@ -46,6 +46,20 @@ namespace BacteriaPlotting
                 Title = merged.ToString(),
                 Values = new ChartValues<ObservablePoint>(merged.Points.Select(e => new ObservablePoint(e.Item1, e.Item2)))
             });
+
+            var biggestX = merged.Points.Select(e => e.Item1).Max();
+            var biggestY = merged.Points.Select(e => e.Item2).Max();
+
+            BacteriaChart.Series.Add(new LineSeries
+            {
+                Title = "Test",
+                Values = new ChartValues<ObservablePoint>
+                {
+                    new ObservablePoint(0,0),
+                    new ObservablePoint(biggestX, biggestY)
+                },
+                Fill = Brushes.Transparent
+            });
         }
 
         private void BtnMatchBacteria_Clicked(object sender, RoutedEventArgs e)
