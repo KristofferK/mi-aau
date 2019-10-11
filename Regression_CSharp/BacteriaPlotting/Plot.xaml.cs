@@ -29,7 +29,7 @@ namespace BacteriaPlotting
 
             ResetSeries();
 
-            AvailableBacteria = BacteriaImporter.Import(15);
+            AvailableBacteria = BacteriaImporter.Import(20);
             ShowBacteria(AvailableBacteria[3], AvailableBacteria[12]);
             ShowBacteria(AvailableBacteria[12], AvailableBacteria[3]);
 
@@ -47,19 +47,19 @@ namespace BacteriaPlotting
                 Title = merged.ToString(),
                 Values = new ChartValues<ObservablePoint>(merged.Points.Select(e => new ObservablePoint(e.Item1, e.Item2)))
             });
-
+            
             var biggestX = merged.Points.Select(e => e.Item1).Max();
-            var biggestY = merged.Points.Select(e => e.Item2).Max();
-
             var regressionResult = new Regression(new LinearRegression()).PerformRegression(merged);
+            var startY = regressionResult.Regression.Transform(0);
+            var endY = regressionResult.Regression.Transform(biggestX);
 
             BacteriaChart.Series.Add(new LineSeries
             {
-                Title = "Test",
+                Title = $"Regression line ({merged.ToString()})",
                 Values = new ChartValues<ObservablePoint>
                 {
-                    new ObservablePoint(0,0),
-                    new ObservablePoint(biggestX, biggestY)
+                    new ObservablePoint(0, startY),
+                    new ObservablePoint(biggestX, endY)
                 },
                 Fill = Brushes.Transparent
             });

@@ -18,7 +18,8 @@ namespace BacteriaRegressionLibrary.BusinessLogic.Regression
             {
                 FormulaUsed = regression.ToString(),
                 PredictionOnTestSet = testX.Select(regression.Transform).ToArray(),
-                PredictionOnTrainingSet = trainX.Select(regression.Transform).ToArray()
+                PredictionOnTrainingSet = trainX.Select(regression.Transform).ToArray(),
+                Regression = regression
             };
         }
     }

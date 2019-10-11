@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Accord.MachineLearning;
+using Accord.Statistics.Models.Regression.Linear;
 
 namespace BacteriaRegressionLibrary.Models
 {
@@ -14,5 +16,6 @@ namespace BacteriaRegressionLibrary.Models
         public double[] PredictionOnTestSet { get; set; }
         public double Error { get; set; }
         public double[] PredictionOnTrainingSet { get; internal set; }
+        public SimpleLinearRegression Regression { get; internal set; }
     }
 }
