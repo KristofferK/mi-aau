@@ -66,7 +66,6 @@ namespace BacteriaPlotting
                 Fill = Brushes.Transparent
             });
 
-            SaveToPng(BacteriaChart, "chart.png");
         }
 
         private void BtnMatchBacteria_Clicked(object sender, RoutedEventArgs e)
@@ -87,21 +86,6 @@ namespace BacteriaPlotting
         private void ResetSeries()
         {
             BacteriaChart.Series = new SeriesCollection();
-        }
-
-        private void SaveToPng(FrameworkElement visual, string fileName)
-        {
-            var encoder = new PngBitmapEncoder();
-            EncodeVisual(visual, fileName, encoder);
-        }
-
-        private static void EncodeVisual(FrameworkElement visual, string fileName, BitmapEncoder encoder)
-        {
-            var bitmap = new RenderTargetBitmap((int)visual.ActualWidth, (int)visual.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            bitmap.Render(visual);
-            var frame = BitmapFrame.Create(bitmap);
-            encoder.Frames.Add(frame);
-            using (var stream = File.Create(fileName)) encoder.Save(stream);
         }
     }
 }
