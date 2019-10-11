@@ -31,7 +31,7 @@ namespace BacteriaPlotting
 
             ResetSeries();
 
-            AvailableBacteria = BacteriaImporter.Import(20);
+            AvailableBacteria = BacteriaImporter.Import(25);
             ShowBacteria(AvailableBacteria[3], AvailableBacteria[12]);
             ShowBacteria(AvailableBacteria[12], AvailableBacteria[3]);
 
