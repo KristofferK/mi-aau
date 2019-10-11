@@ -10,6 +10,7 @@ using BacteriaRegressionLibrary.Models;
 using System.Windows;
 using System.Windows.Media;
 using System.Linq;
+using BacteriaRegressionLibrary.BusinessLogic.Regression;
 
 namespace BacteriaPlotting
 {
@@ -49,6 +50,8 @@ namespace BacteriaPlotting
 
             var biggestX = merged.Points.Select(e => e.Item1).Max();
             var biggestY = merged.Points.Select(e => e.Item2).Max();
+
+            var regressionResult = new Regression(new LinearRegression()).PerformRegression(merged);
 
             BacteriaChart.Series.Add(new LineSeries
             {

@@ -24,7 +24,8 @@ namespace BacteriaRegressionLibrary.BusinessLogic
                 for (var i = 1; i < 15; i++)
                 {
                     reg.RegressionModel = new PolynomialRegression(i);
-                    PrintResultIfGood($"Poly{i}", bacterium, reg.PerformRegression(bacterium));
+                    // PrintResultIfGood($"Poly{i}", bacterium, reg.PerformRegression(bacterium));
+                    Console.WriteLine("TODO: Disabled");
                 }
             }
         }
@@ -32,11 +33,11 @@ namespace BacteriaRegressionLibrary.BusinessLogic
         private static void PrintResultIfGood(string title, Bacterium bacterium, RegressionResult result)
         {
             double matchSum = 0;
-            for (var i = 0; i < result.TestTimestamp.Length; i++)
+            for (var i = 0; i < result.TestY.Length; i++)
             {
-                matchSum += GetMatch(result.TestMeasurements[i], result.PredictionOnTestSet[i]);
+                matchSum += GetMatch(result.TestX[i], result.PredictionOnTestSet[i]);
             }
-            var matchAverage = matchSum / result.TestTimestamp.Length;
+            var matchAverage = matchSum / result.TestY.Length;
             if (matchAverage > 98.5 && matchAverage < 101.5)
             {
                 Console.WriteLine($"Good match found on {bacterium.ASV} with the {title} model. Used {result.FormulaUsed}");

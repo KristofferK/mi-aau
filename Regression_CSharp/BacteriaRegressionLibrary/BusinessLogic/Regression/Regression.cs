@@ -22,22 +22,22 @@ namespace BacteriaRegressionLibrary.BusinessLogic.Regression
             RegressionModel = regressionModel;
         }
 
-        public RegressionResult PerformRegression(Bacterium bacterium)
+        public RegressionResult PerformRegression(MergedBacteria bacteria)
         {
-            var trainSize = (int)(bacterium.Measurements.Count() / 100.0 * TrainSizePercentage);
-            var trainMeasurements = bacterium.Measurements.Take(trainSize).ToArray();
-            var testMeasurements = bacterium.Measurements.Skip(trainSize).ToArray();
+            var trainSize = (int)(bacteria.Bacterium1.Measurements.Count() / 100.0 * TrainSizePercentage);
+            var trainX = bacteria.Bacterium1.Measurements.Take(trainSize).ToArray();
+            var testX = bacteria.Bacterium1.Measurements.Skip(trainSize).ToArray();
 
-            var trainX = Enumerable.Range(0, trainSize).Select(e => (double)e).ToArray();
-            var testX = Enumerable.Range(trainSize, testMeasurements.Length).Select(e => (double)e).ToArray();
+            var trainY = bacteria.Bacterium2.Measurements.Take(trainSize).ToArray();
+            var testY = bacteria.Bacterium2.Measurements.Skip(trainSize).ToArray();
 
-            var result = RegressionModel.PerformRegression(trainX, trainMeasurements, testX, testMeasurements);
+            var result = RegressionModel.PerformRegression(trainX, trainY, testX, testY);
 
-            result.TrainMeasurements = trainMeasurements;
-            result.TrainTimestamp = trainX;
-            result.TestMeasurements = testMeasurements;
-            result.TestTimestamp = testX;
-            result.Error = new SquareLoss(trainMeasurements).Loss(result.PredictionOnTrainingSet);
+            result.TrainX = trainX;
+            result.TrainY = trainY;
+            result.TestX = testX;
+            result.TestY = testY;
+            result.Error = new SquareLoss(trainX).Loss(result.PredictionOnTrainingSet);
             return result;
         }
     }

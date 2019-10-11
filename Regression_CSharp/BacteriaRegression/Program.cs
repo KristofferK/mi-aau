@@ -32,18 +32,18 @@ namespace BacteriaRegressionLibrary
             double matchSum = 0;
             Console.WriteLine("\n");
             Console.WriteLine($"{title} on {bacterium.ASV}. Used {result.FormulaUsed}");
-            for (var i = 0; i < result.TestTimestamp.Length; i++)
+            for (var i = 0; i < result.TestY.Length; i++)
             {
-                var match = GetMatch(result.TestMeasurements[i], result.PredictionOnTestSet[i]);
+                var match = GetMatch(result.TestX[i], result.PredictionOnTestSet[i]);
                 Console.WriteLine(String.Format("Timestamp {0} is {1:0.00} and predicted {2:0.00}. Prediction is {3:0.0000}% of actual value",
-                    result.TestTimestamp[i],
-                    result.TestMeasurements[i],
+                    result.TestY[i],
+                    result.TestX[i],
                     result.PredictionOnTestSet[i],
                     match
                 ));
                 matchSum += match;
             }
-            var matchAverage = matchSum / result.TestTimestamp.Length;
+            var matchAverage = matchSum / result.TestY.Length;
             Console.WriteLine($"Error on training set: {result.Error}");
             Console.WriteLine($"Average match on test set (closer to 100 is better): {Math.Round(matchAverage, 4)}");
         }
