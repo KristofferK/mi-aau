@@ -10,6 +10,8 @@ namespace BacteriaRegressionLibrary.Models
         public Bacterium Bacterium2 { get; set; }
         public List<Tuple<double, double>> Points { get; set; }
         public double CosineDistance { get; set; }
+        public double SpearmanCorrelation { get; set; }
+        public double PearsonCorrelation { get; set; }
 
         public override string ToString()
         {

@@ -1,5 +1,6 @@
 ﻿using Accord.Math;
 using BacteriaRegressionLibrary.Models;
+using MathNet.Numerics.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +24,8 @@ namespace BacteriaRegressionLibrary.BusinessLogic
             }
 
             merged.CosineDistance = 1 - Distance.Cosine(b1.Measurements.ToArray(), b2.Measurements.ToArray());
+            merged.SpearmanCorrelation = Correlation.Spearman(b1.Measurements, b2.Measurements);
+            merged.PearsonCorrelation = Correlation.Pearson(b1.Measurements, b2.Measurements);
 
             return merged;
         }
