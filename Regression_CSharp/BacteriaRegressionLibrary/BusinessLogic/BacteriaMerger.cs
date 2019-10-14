@@ -1,4 +1,5 @@
-﻿using BacteriaRegressionLibrary.Models;
+﻿using Accord.Math;
+using BacteriaRegressionLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,6 +21,8 @@ namespace BacteriaRegressionLibrary.BusinessLogic
             {
                 merged.Points.Add(new Tuple<double, double>(b1.Measurements[i], b2.Measurements[i]));
             }
+
+            merged.CosineDistance = 1 - Distance.Cosine(b1.Measurements.ToArray(), b2.Measurements.ToArray());
 
             return merged;
         }

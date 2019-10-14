@@ -9,6 +9,7 @@ namespace BacteriaRegressionLibrary.Models
         public Bacterium Bacterium1 { get; set; }
         public Bacterium Bacterium2 { get; set; }
         public List<Tuple<double, double>> Points { get; set; }
+        public double CosineDistance { get; set; }
 
         public override string ToString()
         {

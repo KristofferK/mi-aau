@@ -50,10 +50,11 @@ namespace BacteriaPlotting
                 Values = new ChartValues<ObservablePoint>(merged.Points.Select(e => new ObservablePoint(e.Item1, e.Item2)))
             });
             
-            var biggestX = merged.Points.Select(e => e.Item1).Max();
+            var biggestX = merged.Points.Select(e => e.Item1).Max() * 1.25;
             var regressionResult = new Regression(new LinearRegression()).PerformRegression(merged);
             var startY = regressionResult.Regression.Transform(0);
             var endY = regressionResult.Regression.Transform(biggestX);
+            var formula = regressionResult.Regression.ToString();
 
             BacteriaChart.Series.Add(new LineSeries
             {
